@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 28,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -42,43 +42,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.7,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -88,8 +52,16 @@
                 "color": "green"
               },
               {
+                "color": "yellow",
+                "value": 2
+              },
+              {
+                "color": "orange",
+                "value": 3
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 4
               }
             ]
           }
@@ -97,132 +69,39 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 8,
         "x": 0,
         "y": 1
       },
       "id": 7,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(kgateway_translator_translations_running{translator=~\"$translator\"}) by (translator)",
+          "expr": "sum(kgateway_translator_translations_running{translator=~\"$translator|\",namespace=~\"$namespace|\"}) by (translator)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Number of Translations Running per Translator",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "bars",
-            "fillOpacity": 9,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 8,
-        "x": 8,
-        "y": 1
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "sum(kgateway_controller_reconciliations_running{controller=~\"$controller\"}) by (controller)",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Number of Reconciliations Running per Controller",
-      "type": "timeseries"
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -242,8 +121,16 @@
                 "color": "green"
               },
               {
+                "color": "yellow",
+                "value": 2
+              },
+              {
+                "color": "orange",
+                "value": 3
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 4
               }
             ]
           }
@@ -251,18 +138,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
+        "h": 5,
         "w": 8,
-        "x": 16,
+        "x": 8,
         "y": 1
       },
-      "id": 6,
+      "id": 8,
       "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
-        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -270,28 +155,98 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(kgateway_controller_reconciliations_running{controller=~\"$controller|\",namespace=~\"$namespace|\"}) by (controller)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(gloo_gateway_controller_reconciliations_running{controller=~\"$controller|\",namespace=~\"$namespace|\"}) by (controller)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Number of Reconciliations Running per Controller",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 8,
+        "x": 16,
+        "y": 1
+      },
+      "id": 6,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(kgateway_resources_managed) by (resource)",
+          "expr": "sum(kgateway_resources_managed{parent=~\"$gateway|\",namespace=~\"$namespace|\"}) by (resource)",
           "hide": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{resource}}",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Number of Resources",
-      "type": "stat"
+      "type": "gauge"
     },
     {
       "datasource": {
@@ -353,10 +308,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 8,
         "x": 0,
-        "y": 5
+        "y": 6
       },
       "id": 17,
       "options": {
@@ -380,10 +335,10 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(kgateway_translator_translations_total{translator=~\"$translator\"}[5m])) by (result)",
+          "expr": "sum(rate(kgateway_translator_translations_total{translator=~\"$translator|\",namespace=~\"$namespace|\"}[5m])) by (translator, result)",
           "hide": false,
           "instant": false,
-          "legendFormat": "{{result}}",
+          "legendFormat": "{{translator}}: {{result}}",
           "range": true,
           "refId": "B"
         }
@@ -451,10 +406,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 8,
         "x": 8,
-        "y": 5
+        "y": 6
       },
       "id": 18,
       "options": {
@@ -478,10 +433,10 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(rate(kgateway_controller_reconciliations_total[5m])) by (result)",
+          "expr": "sum(rate(kgateway_controller_reconciliations_total{controller=~\"$controller|\",namespace=~\"$namespace|\"}[5m])) by (controller, result)",
           "hide": false,
           "instant": false,
-          "legendFormat": "{{result}}",
+          "legendFormat": "{{controller}}: {{result}}",
           "range": true,
           "refId": "B"
         }
@@ -491,343 +446,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 13,
-        "w": 8,
-        "x": 16,
-        "y": 5
-      },
-      "id": 1,
-      "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "top",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "editorMode": "code",
-          "expr": "sum(kgateway_xds_snapshot_resources) by (gateway, resource)",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Gateway: {{gateway}} - {{resource}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Number of Resources in Collections by Gateways",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 9,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "sishort"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 11
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(kgateway_translator_translations_total{translator=~\"$translator\"}) by (translator)",
-          "format": "time_series",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "{{translator}}",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "Number of Translations Over Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 9,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 11
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "sum(kgateway_controller_reconciliations_total{controller=~\"$controller\"}) by (controller)",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "Number of Controller Reconciliations Over Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 8,
-        "x": 0,
-        "y": 18
-      },
-      "id": 10,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "kgateway_routing_domains",
-          "legendFormat": "{{namespace}}-{{gateway}}:{{port}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Routing domains (per gateway:port)",
-      "type": "gauge"
-    },
-    {
-      "datasource": {
         "uid": "prometheus"
       },
       "fieldConfig": {
@@ -888,10 +506,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 8,
-        "x": 8,
-        "y": 18
+        "x": 0,
+        "y": 13
       },
       "id": 12,
       "options": {
@@ -912,18 +530,18 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(kgateway_status_syncer_status_syncs_total) by (syncer)",
+          "expr": "sum(rate(kgateway_status_syncer_status_syncs_total{namespace=~\"$namespace|\"}[5m])) by (syncer, result) ",
           "hide": false,
           "instant": false,
-          "legendFormat": "{{label_name}}",
+          "legendFormat": "{{syncer}}: {{result}}",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "Status Syncs Over Time",
+      "title": "Status Syncs Rate by Results",
       "type": "timeseries"
     },
     {
@@ -934,40 +552,165 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "thresholds"
           },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "sishort"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 8,
+        "x": 8,
+        "y": 13
+      },
+      "id": 9,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(kgateway_translator_translations_total{translator=~\"$translator|\",namespace=~\"$namespace|\"}) by (translator)",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Translator: {{translator}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(kgateway_controller_reconciliations_total{controller=~\"$controller|\",namespace=~\"$namespace|\"}) by (controller)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Controller: {{controller}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "sum(kgateway_status_syncer_status_syncs_total{namespace=~\"$namespace|\"}) by (syncer)",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Syncer: {{syncer}}",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Total Operations",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 8,
+        "x": 16,
+        "y": 13
+      },
+      "id": 31,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kgateway_xds_snapshot_resources{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (gateway, resource)",
+          "instant": false,
+          "legendFormat": "{{gateway}}: {{resource}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "XDS Resources by Gateway",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
           },
           "mappings": [],
           "thresholds": {
@@ -988,41 +731,39 @@
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 16,
-        "y": 18
+        "x": 0,
+        "y": 20
       },
-      "id": 13,
+      "id": 10,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
       "pluginVersion": "12.0.2",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
           "editorMode": "code",
-          "expr": "count(apiserver_request_total{group=~\"gateway.*|solo.*|gloo.*\" ,code=\"422\"}) by (group, resource, subresource)",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "{{group}}, {{resource}}",
+          "expr": "sum(kgateway_routing_domains{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (gateway,port)",
+          "legendFormat": "{{gateway}}:{{port}}",
           "range": true,
-          "refId": "B"
+          "refId": "A"
         }
       ],
-      "title": "Failed validations",
-      "type": "timeseries"
+      "title": "Routing Domains per Gateway Port",
+      "type": "stat"
     },
     {
       "collapsed": false,
@@ -1030,11 +771,11 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 26
       },
       "id": 19,
       "panels": [],
-      "title": "Control Plane Operation Latency",
+      "title": "Control Plane Operations",
       "type": "row"
     },
     {
@@ -1098,135 +839,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
         "x": 0,
-        "y": 25
-      },
-      "id": 3,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(kgateway_translator_translation_duration_seconds_bucket[5m])) by (le)) OR histogram_quantile(0.99, sum(rate(kgateway_translator_translation_duration_seconds[5m])))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "p99",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(kgateway_translator_translation_duration_seconds_bucket[5m])) by (le)) OR histogram_quantile(0.90, sum(rate(kgateway_translator_translation_duration_seconds[5m])))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "p90",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum(rate(kgateway_translator_translation_duration_seconds_bucket[5m])) by (le)) OR histogram_quantile(0.70, sum(rate(kgateway_translator_translation_duration_seconds[5m])))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "p70",
-          "range": true,
-          "refId": "C"
-        }
-      ],
-      "title": "Translation Latency",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 9,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 25
+        "y": 27
       },
       "id": 5,
       "options": {
@@ -1250,7 +866,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(kgateway_controller_reconcile_duration_seconds_bucket[5m])) by (le)) OR histogram_quantile(0.99, sum(rate(kgateway_controller_reconcile_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_controller_reconcile_duration_seconds{gateway=~\"$gateway|\",controller=~\"$controller|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p99",
@@ -1263,7 +879,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(kgateway_controller_reconcile_duration_seconds_bucket[$__rate_interval])) by (le)) OR histogram_quantile(0.90, sum(rate(kgateway_controller_reconcile_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_controller_reconcile_duration_seconds{gateway=~\"$gateway|\",controller=~\"$controller|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p90",
@@ -1276,7 +892,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum(rate(kgateway_controller_reconcile_duration_seconds_bucket[$__rate_interval])) by (le)) OR histogram_quantile(0.70, sum(rate(kgateway_controller_reconcile_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_controller_reconcile_duration_seconds{gateway=~\"$gateway|\",controller=~\"$controller|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p70",
@@ -1348,10 +964,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
-        "x": 16,
-        "y": 25
+        "x": 8,
+        "y": 27
       },
       "id": 21,
       "options": {
@@ -1375,7 +991,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.99, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_status_syncer_status_sync_duration_seconds{name=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p99",
@@ -1388,7 +1004,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.90, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_status_syncer_status_sync_duration_seconds{name=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p90",
@@ -1401,7 +1017,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.70, sum(rate(kgateway_status_syncer_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_status_syncer_status_sync_duration_seconds{name=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p70",
@@ -1473,7 +1089,132 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 27
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_translator_translation_duration_seconds{name=~\"$gateway|\",translator=~\"$translator|\",namespace=~\"$namespace|\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "p99",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_translator_translation_duration_seconds{name=~\"$gateway|\",translator=~\"$translator|\",namespace=~\"$namespace|\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "p90",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_translator_translation_duration_seconds{name=~\"$gateway|\",translator=~\"$translator|\",namespace=~\"$namespace|\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "p70",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Translation Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 9,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
         "w": 8,
         "x": 0,
         "y": 33
@@ -1500,7 +1241,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(kgateway_xds_snapshot_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_xds_snapshot_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p99",
@@ -1513,7 +1254,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(kgateway_xds_snapshot_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_xds_snapshot_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p90",
@@ -1526,7 +1267,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum(rate(kgateway_xds_snapshot_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_xds_snapshot_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p70",
@@ -1593,143 +1334,14 @@
               }
             ]
           },
-          "unit": "sishort"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "histogram_count(sum(kgateway_resources_xds_snapshot_sync_duration_seconds{gateway=~\"(http|metrics-test-gateway)\"}))"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 33
-      },
-      "id": 20,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.0.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "sum by(gateway) (kgateway_xds_snapshot_syncs_total{gateway=~\"$gateway\"})",
-          "format": "time_series",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "interval": "",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "XDS Snapshot Syncs Total",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 9,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
           "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 6,
         "w": 8,
-        "x": 16,
+        "x": 8,
         "y": 33
       },
       "id": 22,
@@ -1754,7 +1366,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.99, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p99",
@@ -1767,7 +1379,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.90, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p90",
@@ -1780,7 +1392,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])) by (le)) OR histogram_quantile(0.70, sum(rate(kgateway_resources_status_sync_duration_seconds[5m])))",
+          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
           "hide": false,
           "instant": false,
           "legendFormat": "p70",
@@ -1790,6 +1402,67 @@
       ],
       "title": "Resource Status Sync Latency",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 33
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "vertical",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(kgateway_resources_status_syncs_completed_total{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (resource)",
+          "instant": false,
+          "legendFormat": " {{resource}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Status Syncs by Resource",
+      "type": "stat"
     }
   ],
   "preload": false,
@@ -1836,6 +1509,7 @@
         "definition": "label_values(kgateway_resources_managed,namespace)",
         "includeAll": true,
         "label": "Namespace",
+        "multi": true,
         "name": "namespace",
         "options": [],
         "query": {
