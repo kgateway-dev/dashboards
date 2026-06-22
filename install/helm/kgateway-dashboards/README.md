@@ -10,6 +10,5 @@ which can be used for monitoring control-plane and data-plane metrics.
 
 # Dashboards
 
-- [Envoy](dashboards/envoy.json): A basic dashboard for monitoring Envoy data-plane metrics.
-- [Agentgateway](dashboards/agentgateway.json): A basic dashboard for Agentgateway data-plane metrics.
+- [Envoy](dashboards/envoy.json): A basic dashboard for monitoring data-plane metrics.
 - [Kgateway Operations](dashboards/kgateway.json): A basic dashboard for monitoring control-plane metrics.
