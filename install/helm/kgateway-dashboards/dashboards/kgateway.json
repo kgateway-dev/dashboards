@@ -237,7 +237,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(kgateway_resources_managed{parent=~\"$gateway|\",namespace=~\"$namespace|\"}) by (resource)",
+          "expr": "sum by (resource) (max by (namespace, exported_namespace, parent, resource) (kgateway_resources_managed{parent=~\"$gateway|\",namespace=~\"$namespace|\"}))",
           "hide": false,
           "instant": false,
           "legendFormat": "{{resource}}",
@@ -693,7 +693,7 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(kgateway_xds_snapshot_resources{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (gateway, resource)",
+          "expr": "sum by (gateway, resource) (max by (namespace, exported_namespace, gateway, resource) (kgateway_xds_snapshot_resources{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}))",
           "instant": false,
           "legendFormat": "{{gateway}}: {{resource}}",
           "range": true,
@@ -756,7 +756,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(kgateway_routing_domains{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (gateway,port)",
+          "expr": "sum by (gateway, port) (max by (namespace, exported_namespace, gateway, port) (kgateway_routing_domains{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}))",
           "legendFormat": "{{gateway}}:{{port}}",
           "range": true,
           "refId": "A"

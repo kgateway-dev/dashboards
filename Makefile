@@ -46,6 +46,17 @@ init-git-hooks:  ## Use the tracked version of Git hooks from this repo
 analyze:  lint-charts ## Run linters
 
 #----------------------------------------------------------------------------------
+# Test
+#----------------------------------------------------------------------------------
+
+PYTHON ?= python3
+PROMTOOL ?= promtool
+
+.PHONY: test-dashboard-queries
+test-dashboard-queries: ## Test dashboard queries with promtool
+	PROMTOOL="$(PROMTOOL)" $(PYTHON) -B -m unittest discover -s tests -p 'test_*.py' -v
+
+#----------------------------------------------------------------------------------
 # Clean
 #----------------------------------------------------------------------------------
 
