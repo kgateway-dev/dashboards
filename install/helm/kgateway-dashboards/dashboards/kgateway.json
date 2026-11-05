@@ -157,10 +157,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 8,
         "x": 0,
-        "y": 6
+        "y": 1
       },
       "id": 17,
       "options": {
@@ -255,10 +255,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 8,
         "x": 8,
-        "y": 6
+        "y": 1
       },
       "id": 18,
       "options": {
@@ -465,10 +465,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 6,
+        "h": 13,
         "w": 8,
         "x": 0,
-        "y": 20
+        "y": 13
       },
       "id": 10,
       "options": {
@@ -702,7 +702,7 @@
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 16,
+        "x": 8,
         "y": 27
       },
       "id": 3,
@@ -827,8 +827,8 @@
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 0,
-        "y": 33
+        "x": 16,
+        "y": 27
       },
       "id": 23,
       "options": {
@@ -944,16 +944,15 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "s"
+          }
         },
         "overrides": []
       },
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 8,
-        "y": 33
+        "x": 0,
+        "y": 7
       },
       "id": 22,
       "options": {
@@ -977,41 +976,15 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.99, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
+          "expr": "sum(rate(kgateway_status_writes_total[5m])) by (kind, result)",
           "hide": false,
           "instant": false,
-          "legendFormat": "p99",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "p90",
+          "legendFormat": "{{kind}}: {{result}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.70, sum by(le)(rate(kgateway_resources_status_sync_duration_seconds{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}[5m])))",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "p70",
-          "range": true,
-          "refId": "C"
         }
       ],
-      "title": "Resource Status Sync Latency",
+      "title": "Status Writes Rate by Results",
       "type": "timeseries"
     },
     {
@@ -1025,11 +998,16 @@
             "mode": "thresholds"
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 1
               }
             ]
           }
@@ -1039,8 +1017,8 @@
       "gridPos": {
         "h": 6,
         "w": 8,
-        "x": 16,
-        "y": 33
+        "x": 8,
+        "y": 7
       },
       "id": 32,
       "options": {
@@ -1065,14 +1043,14 @@
         {
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(kgateway_resources_status_syncs_completed_total{gateway=~\"$gateway|\",namespace=~\"$namespace|\"}) by (resource)",
+          "expr": "sum(kgateway_status_writes_total{result=\"error\"}) by (kind)",
           "instant": false,
-          "legendFormat": " {{resource}}",
+          "legendFormat": "{{kind}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Status Syncs by Resource",
+      "title": "Failed Status Writes by Kind",
       "type": "stat"
     }
   ],
